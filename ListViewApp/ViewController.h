@@ -14,6 +14,7 @@
     NSMutableArray *rowArray;
     NSString *titleString;
     UITableView *table;
+    BOOL isDragging_msg, isDecliring_msg;
 }
 
 @property (strong,nonatomic) NSMutableArray *rowArray;

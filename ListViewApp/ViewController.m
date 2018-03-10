@@ -95,7 +95,6 @@
     
     if(cell == nil) {
         cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
-        
     }
     
     // display title in cell
@@ -111,8 +110,63 @@
     } else{
         cell.detailTextLabel.text = @"";
     }
+    //display image in imageview of cell
+    NSURL *imgUrl;
+    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"imageHref"]!=[NSNull null]){
+        imgUrl = [NSURL URLWithString:[[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"imageHref"]];
+    }
+    if (!isDragging_msg && !isDecliring_msg)
+    {
+        // download the image asynchronously
+        [self downloadImageWithURL:imgUrl completionBlock:^(BOOL succeeded, UIImage *image) {
+            if (succeeded) {
+                // change the image in the cell
+                cell.imageView.frame = CGRectMake(cell.imageView.frame.origin.x, cell.imageView.frame.origin.y, 40,40);
+                cell.imageView.image = image;
+            }
+        }];
+    }
+    //    else {
+    //        cell.imageView.frame = CGRectMake(cell.imageView.frame.origin.x, cell.imageView.frame.origin.y, 40,40);
+    //        cell.imageView.image = [UIImage imageNamed:@"Placeholder.png"];
+    //    }
     
     return cell;
+}
+
+#pragma mark - method to download image asynchronously
+// method to download image from url asynchronously
+- (void)downloadImageWithURL:(NSURL *)url completionBlock:(void (^)(BOOL succeeded, UIImage *image))completionBlock
+{
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:url];
+    [NSURLConnection sendAsynchronousRequest:request
+                                       queue:[NSOperationQueue mainQueue]
+                           completionHandler:^(NSURLResponse *response, NSData *data, NSError *error) {
+                               if ( !error )
+                               {
+                                   UIImage *image = [[UIImage alloc] initWithData:data];
+                                   completionBlock(YES,image);
+                               } else{
+                                   completionBlock(NO,nil);
+                               }
+                           }];
+}
+
+#pragma mark - Handling image loading on scroll
+// handling image loading on scroll
+- (void)scrollViewDidEndDragging:(UIScrollView *)scrollView willDecelerate:(BOOL)decelerate{
+    isDragging_msg = FALSE;
+    //[self.table reloadData];
+}
+- (void)scrollViewDidEndDecelerating:(UIScrollView *)scrollView{
+    isDecliring_msg = FALSE;
+    //[self.table reloadData];
+}
+- (void)scrollViewWillBeginDragging:(UIScrollView *)scrollView{
+    isDragging_msg = TRUE;
+}
+- (void)scrollViewWillBeginDecelerating:(UIScrollView *)scrollView{
+    isDecliring_msg = TRUE;
 }
 
 
