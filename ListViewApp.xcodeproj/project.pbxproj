@@ -9,9 +9,7 @@
 /* Begin PBXBuildFile section */
 		AD7AE64820546B0A005A7BF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE64720546B0A005A7BF9 /* AppDelegate.m */; };
 		AD7AE64B20546B0A005A7BF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE64A20546B0A005A7BF9 /* ViewController.m */; };
-		AD7AE64E20546B0A005A7BF9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD7AE64C20546B0A005A7BF9 /* Main.storyboard */; };
 		AD7AE65020546B0A005A7BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */; };
-		AD7AE65320546B0A005A7BF9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = AD7AE65120546B0A005A7BF9 /* LaunchScreen.storyboard */; };
 		AD7AE65620546B0A005A7BF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE65520546B0A005A7BF9 /* main.m */; };
 		AD7AE66020546B0B005A7BF9 /* ListViewAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE65F20546B0B005A7BF9 /* ListViewAppTests.m */; };
 /* End PBXBuildFile section */
@@ -32,9 +30,7 @@
 		AD7AE64720546B0A005A7BF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
 		AD7AE64920546B0A005A7BF9 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
 		AD7AE64A20546B0A005A7BF9 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
-		AD7AE64D20546B0A005A7BF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		AD7AE65220546B0A005A7BF9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		AD7AE65420546B0A005A7BF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		AD7AE65520546B0A005A7BF9 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		AD7AE65B20546B0B005A7BF9 /* ListViewAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListViewAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -85,9 +81,7 @@
 				AD7AE64720546B0A005A7BF9 /* AppDelegate.m */,
 				AD7AE64920546B0A005A7BF9 /* ViewController.h */,
 				AD7AE64A20546B0A005A7BF9 /* ViewController.m */,
-				AD7AE64C20546B0A005A7BF9 /* Main.storyboard */,
 				AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */,
-				AD7AE65120546B0A005A7BF9 /* LaunchScreen.storyboard */,
 				AD7AE65420546B0A005A7BF9 /* Info.plist */,
 				AD7AE65520546B0A005A7BF9 /* main.m */,
 			);
@@ -185,9 +179,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD7AE65320546B0A005A7BF9 /* LaunchScreen.storyboard in Resources */,
 				AD7AE65020546B0A005A7BF9 /* Assets.xcassets in Resources */,
-				AD7AE64E20546B0A005A7BF9 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -228,25 +220,6 @@
 			targetProxy = AD7AE65C20546B0B005A7BF9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXVariantGroup section */
-		AD7AE64C20546B0A005A7BF9 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD7AE64D20546B0A005A7BF9 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		AD7AE65120546B0A005A7BF9 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				AD7AE65220546B0A005A7BF9 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		AD7AE66220546B0B005A7BF9 /* Debug */ = {
@@ -359,6 +332,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ListViewApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = reetesh.ListViewApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -372,6 +346,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				INFOPLIST_FILE = ListViewApp/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = reetesh.ListViewApp;
 				PRODUCT_NAME = "$(TARGET_NAME)";
