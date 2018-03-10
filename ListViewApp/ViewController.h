@@ -13,9 +13,11 @@
     NSMutableData *_responseData;
     NSMutableArray *rowArray;
     NSString *titleString;
+    UITableView *table;
 }
 
 @property (strong,nonatomic) NSMutableArray *rowArray;
+@property (strong,nonatomic) UITableView *table;
 
 @end
 

@@ -8,13 +8,13 @@
 
 #import "ViewController.h"
 
-@interface ViewController () <NSURLConnectionDelegate>
+@interface ViewController () <NSURLConnectionDelegate, UITableViewDelegate, UITableViewDataSource>
 
 @end
 
 @implementation ViewController
 
-@synthesize rowArray;
+@synthesize rowArray, table;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
@@ -27,6 +27,12 @@
     // Create url connection and fire request
     NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
     NSLog(@"%@", conn);
+    
+    //create table view and set with delegate and data source
+    self.table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
+    self.table.delegate = self;
+    self.table.dataSource = self;
+    [self.view addSubview:self.table];
 }
 
 - (void)didReceiveMemoryWarning {
@@ -65,10 +71,47 @@
     }
     //update title of navigation bar
     self.navigationController.navigationBar.topItem.title = titleString;
+    //reload tableview
+    [self.table reloadData];
 }
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
     // The request has failed for some reason!
     // Check the error var
+}
+
+#pragma mark - tableview delegate
+
+- (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section{
+    return self.rowArray.count;
+}
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
+{
+    static NSString *cellIdentifier = @"cellIdentifier";
+    
+    UITableViewCell *cell = [self.table dequeueReusableCellWithIdentifier:cellIdentifier];
+    
+    if(cell == nil) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:cellIdentifier];
+        
+    }
+    
+    // display title in cell
+    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"title"]!=[NSNull null]){
+        cell.textLabel.text =  [[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"title"];
+    } else{
+        cell.textLabel.text = @"";
+    }
+    //display description in cell
+    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"]!=[NSNull null]){
+        cell.detailTextLabel.text =  [[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"];
+    } else{
+        cell.detailTextLabel.text = @"";
+    }
+    
+    return cell;
 }
 
 
