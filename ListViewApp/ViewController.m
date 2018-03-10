@@ -107,6 +107,7 @@
     //display description in cell
     if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"]!=[NSNull null]){
         cell.detailTextLabel.text =  [[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"];
+        cell.detailTextLabel.numberOfLines = 0;
     } else{
         cell.detailTextLabel.text = @"";
     }
