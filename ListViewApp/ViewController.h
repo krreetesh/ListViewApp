@@ -9,7 +9,13 @@
 #import <UIKit/UIKit.h>
 
 @interface ViewController : UIViewController
+{
+    NSMutableData *_responseData;
+    NSMutableArray *rowArray;
+    NSString *titleString;
+}
 
+@property (strong,nonatomic) NSMutableArray *rowArray;
 
 @end
 
