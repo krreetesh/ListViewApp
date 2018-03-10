@@ -177,6 +177,17 @@
     isDecliring_msg = TRUE;
 }
 
+#pragma mark - Interface Orientation
+// Handling orientation change form portrait to landscape and vice versa
+- (void)willRotateToInterfaceOrientation:(UIInterfaceOrientation)toInterfaceOrientation duration:(NSTimeInterval)duration
+{
+    // do something before rotation
+    
+    self.view.autoresizingMask = UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    self.table.autoresizingMask =  UIViewAutoresizingFlexibleWidth | UIViewAutoresizingFlexibleBottomMargin;
+    
+    [table reloadData];
+}
 
 
 @end
