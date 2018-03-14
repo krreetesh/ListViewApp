@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD2B8CB220593CC1009E7C7C /* DataModel.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2B8CB120593CC1009E7C7C /* DataModel.m */; };
+		AD2B8CB520593E9E009E7C7C /* JSONParseController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD2B8CB420593E9E009E7C7C /* JSONParseController.m */; };
 		AD7AE64820546B0A005A7BF9 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE64720546B0A005A7BF9 /* AppDelegate.m */; };
 		AD7AE64B20546B0A005A7BF9 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE64A20546B0A005A7BF9 /* ViewController.m */; };
 		AD7AE65020546B0A005A7BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */; };
@@ -25,6 +27,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		AD2B8CB020593CC1009E7C7C /* DataModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DataModel.h; sourceTree = "<group>"; };
+		AD2B8CB120593CC1009E7C7C /* DataModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = DataModel.m; sourceTree = "<group>"; };
+		AD2B8CB320593E9E009E7C7C /* JSONParseController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JSONParseController.h; sourceTree = "<group>"; };
+		AD2B8CB420593E9E009E7C7C /* JSONParseController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONParseController.m; sourceTree = "<group>"; };
 		AD7AE64320546B0A005A7BF9 /* ListViewApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ListViewApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD7AE64620546B0A005A7BF9 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		AD7AE64720546B0A005A7BF9 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -79,8 +85,12 @@
 			children = (
 				AD7AE64620546B0A005A7BF9 /* AppDelegate.h */,
 				AD7AE64720546B0A005A7BF9 /* AppDelegate.m */,
+				AD2B8CB020593CC1009E7C7C /* DataModel.h */,
+				AD2B8CB120593CC1009E7C7C /* DataModel.m */,
 				AD7AE64920546B0A005A7BF9 /* ViewController.h */,
 				AD7AE64A20546B0A005A7BF9 /* ViewController.m */,
+				AD2B8CB320593E9E009E7C7C /* JSONParseController.h */,
+				AD2B8CB420593E9E009E7C7C /* JSONParseController.m */,
 				AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */,
 				AD7AE65420546B0A005A7BF9 /* Info.plist */,
 				AD7AE65520546B0A005A7BF9 /* main.m */,
@@ -197,7 +207,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD2B8CB520593E9E009E7C7C /* JSONParseController.m in Sources */,
 				AD7AE64B20546B0A005A7BF9 /* ViewController.m in Sources */,
+				AD2B8CB220593CC1009E7C7C /* DataModel.m in Sources */,
 				AD7AE65620546B0A005A7BF9 /* main.m in Sources */,
 				AD7AE64820546B0A005A7BF9 /* AppDelegate.m in Sources */,
 			);

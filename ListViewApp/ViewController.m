@@ -7,8 +7,9 @@
 //
 
 #import "ViewController.h"
+#import "JSONParseController.h"
 
-@interface ViewController () <NSURLConnectionDelegate, UITableViewDelegate, UITableViewDataSource>
+@interface ViewController () <UITableViewDelegate, UITableViewDataSource, JSONParserDelegate> //conforming to protocol
 
 @end
 
@@ -22,12 +23,12 @@
     
     self.rowArray = [[NSMutableArray alloc]init];
     
-    // Create the request.
-    NSURLRequest *request = [NSURLRequest requestWithURL:[NSURL URLWithString:@"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"]];
-    // Create url connection and fire request
-    NSURLConnection *conn = [[NSURLConnection alloc] initWithRequest:request delegate:self];
-    NSLog(@"%@", conn);
+    NSString *urlString = @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json";
     
+    JSONParseController *jsonParserObj = [[JSONParseController alloc]initWithURL:urlString];
+    
+    jsonParserObj.delegate = self;
+
     //create table view and set with delegate and data source
     self.table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.table.delegate = self;
@@ -40,43 +41,16 @@
     // Dispose of any resources that can be recreated.
 }
 
-#pragma mark - servcie call using NSURLConnection
-- (void)connection:(NSURLConnection *)connection didReceiveResponse:(NSURLResponse *)response {
-    _responseData = [[NSMutableData alloc] init];
-}
-- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data {
-    // Append the new data to the instance variable you declared
-    [_responseData appendData:data];
-}
-- (NSCachedURLResponse *)connection:(NSURLConnection *)connection
-                  willCacheResponse:(NSCachedURLResponse*)cachedResponse {
-    // Return nil to indicate not necessary to store a cached response for this connection
-    return nil;
-}
-- (void)connectionDidFinishLoading:(NSURLConnection *)connection {
-    // The request is complete and data has been received
-    // You can parse the stuff in your instance variable now
-    NSError *error;
-    NSString *string = [[NSString alloc] initWithData:_responseData encoding:NSASCIIStringEncoding];
-    NSData *dataUTF8 = [string dataUsingEncoding:NSUTF8StringEncoding];
-    id jsonObject = [NSJSONSerialization JSONObjectWithData:dataUTF8 options:kNilOptions error:&error];
-    
-    if (error) {
-        //Error handling
-    } else {
-        //use your json object
-        self.rowArray = [jsonObject objectForKey:@"rows"];
-        titleString = [jsonObject objectForKey:@"title"];
-        NSLog(@"rowArray=%@",self.rowArray);
-    }
+#pragma mark - implement protocol method
+//Implementing the Protocol method - fetchDataWithModelArray
+- (void)fetchDataWithModelArray:(NSMutableArray*)model titleString:(NSString *)navigationTitle
+{
     //update title of navigation bar
-    self.navigationController.navigationBar.topItem.title = titleString;
-    //reload tableview
+    self.navigationController.navigationBar.topItem.title = navigationTitle;
+    //update model data
+    rowArray = model;
+    //reload table view
     [self.table reloadData];
-}
-- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error {
-    // The request has failed for some reason!
-    // Check the error var
 }
 
 #pragma mark - tableview delegate
@@ -106,26 +80,35 @@
     UIGraphicsEndImageContext();
     
     // display title in cell
-    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"title"]!=[NSNull null]){
-        cell.textLabel.text =  [[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"title"];
-    } else{
+    if([[self.rowArray objectAtIndex:indexPath.row]titleToRow]==nil || [[[self.rowArray objectAtIndex:indexPath.row]descriptionToRow] isEqual:[NSNull null]]){
         cell.textLabel.text = @"";
     }
+    else{
+        cell.textLabel.text = [[self.rowArray objectAtIndex:indexPath.row]titleToRow];
+    }
+    
     //display description in cell
-    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"]!=[NSNull null]){
-        cell.detailTextLabel.text =  [[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"description"];
-        cell.detailTextLabel.numberOfLines = 0;
-    } else{
+    if([[self.rowArray objectAtIndex:indexPath.row]descriptionToRow]==nil || [[[self.rowArray objectAtIndex:indexPath.row]descriptionToRow] isEqual:[NSNull null]]){
         cell.detailTextLabel.text = @"";
     }
+    else{
+        cell.detailTextLabel.text = [[self.rowArray objectAtIndex:indexPath.row]descriptionToRow];
+        cell.detailTextLabel.numberOfLines = 0;
+    }
+    
     //display image in imageview of cell
     NSURL *imgUrl;
-    if([[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"imageHref"]!=[NSNull null]){
-        imgUrl = [NSURL URLWithString:[[self.rowArray objectAtIndex:indexPath.row]valueForKey:@"imageHref"]];
+    if([[self.rowArray objectAtIndex:indexPath.row]imageHrefToRow]==(id) [NSNull null] || [[[self.rowArray objectAtIndex:indexPath.row]imageHrefToRow] length]==0 || [[[self.rowArray objectAtIndex:indexPath.row]imageHrefToRow] isEqualToString:@""]){
+        imgUrl = nil;
     }
+    else{
+        imgUrl = [NSURL URLWithString:[[self.rowArray objectAtIndex:indexPath.row]imageHrefToRow]];
+    }
+    
     if (!isDragging_msg && !isDecliring_msg)
     {
         // download the image asynchronously
+        if(imgUrl!=nil){
         [self downloadImageWithURL:imgUrl completionBlock:^(BOOL succeeded, UIImage *image) {
             if (succeeded) {
                 // change the image in the cell
@@ -133,6 +116,7 @@
                 cell.imageView.image = image;
             }
         }];
+        }
     }
     //    else {
     //        cell.imageView.frame = CGRectMake(cell.imageView.frame.origin.x, cell.imageView.frame.origin.y, 40,40);

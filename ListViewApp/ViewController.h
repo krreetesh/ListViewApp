@@ -10,9 +10,7 @@
 
 @interface ViewController : UIViewController
 {
-    NSMutableData *_responseData;
     NSMutableArray *rowArray;
-    NSString *titleString;
     UITableView *table;
     BOOL isDragging_msg, isDecliring_msg;
 }
