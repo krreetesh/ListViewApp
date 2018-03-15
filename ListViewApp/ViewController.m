@@ -47,6 +47,8 @@
     // Dispose of any resources that can be recreated.
 }
 
+#pragma mark - fetch data
+//load data from server
 -(void)startLoadingData
 {
     JSONParseController *jsonParserObj = [[JSONParseController alloc]initWithURL:getURLString];

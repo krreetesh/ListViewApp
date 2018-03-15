@@ -14,6 +14,7 @@
 		AD7AE65020546B0A005A7BF9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = AD7AE64F20546B0A005A7BF9 /* Assets.xcassets */; };
 		AD7AE65620546B0A005A7BF9 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE65520546B0A005A7BF9 /* main.m */; };
 		AD7AE66020546B0B005A7BF9 /* ListViewAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = AD7AE65F20546B0B005A7BF9 /* ListViewAppTests.m */; };
+		ADEB600C205A94DE00BB514C /* JSONParseTest.m in Sources */ = {isa = PBXBuildFile; fileRef = ADEB600B205A94DE00BB514C /* JSONParseTest.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -42,6 +43,7 @@
 		AD7AE65B20546B0B005A7BF9 /* ListViewAppTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = ListViewAppTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		AD7AE65F20546B0B005A7BF9 /* ListViewAppTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ListViewAppTests.m; sourceTree = "<group>"; };
 		AD7AE66120546B0B005A7BF9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ADEB600B205A94DE00BB514C /* JSONParseTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JSONParseTest.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,6 +104,7 @@
 			isa = PBXGroup;
 			children = (
 				AD7AE65F20546B0B005A7BF9 /* ListViewAppTests.m */,
+				ADEB600B205A94DE00BB514C /* JSONParseTest.m */,
 				AD7AE66120546B0B005A7BF9 /* Info.plist */,
 			);
 			path = ListViewAppTests;
@@ -220,6 +223,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				AD7AE66020546B0B005A7BF9 /* ListViewAppTests.m in Sources */,
+				ADEB600C205A94DE00BB514C /* JSONParseTest.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
