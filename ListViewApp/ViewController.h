@@ -18,5 +18,7 @@
 @property (strong,nonatomic) NSMutableArray *rowArray;
 @property (strong,nonatomic) UITableView *table;
 
+-(void)refreshView:(UIRefreshControl *)refresh;
+
 @end
 

@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "JSONParseController.h"
+#define getURLString @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json"
 
 @interface ViewController () <UITableViewDelegate, UITableViewDataSource, JSONParserDelegate> //conforming to protocol
 
@@ -23,22 +24,50 @@
     
     self.rowArray = [[NSMutableArray alloc]init];
     
-    NSString *urlString = @"https://dl.dropboxusercontent.com/s/2iodh4vg0eortkl/facts.json";
-    
-    JSONParseController *jsonParserObj = [[JSONParseController alloc]initWithURL:urlString];
-    
-    jsonParserObj.delegate = self;
+    //load the data
+    [self startLoadingData];
 
     //create table view and set with delegate and data source
     self.table = [[UITableView alloc] initWithFrame:self.view.bounds style:UITableViewStylePlain];
     self.table.delegate = self;
     self.table.dataSource = self;
     [self.view addSubview:self.table];
+    
+    //set up our UIRefreshControl
+    UIRefreshControl *refreshControl = [UIRefreshControl new];
+    [self.table insertSubview:refreshControl atIndex:0];
+    refreshControl.attributedTitle = [[NSAttributedString alloc] initWithString:@"Pull to refresh..."];
+    refreshControl.backgroundColor = [UIColor purpleColor];
+    refreshControl.tintColor = [UIColor whiteColor];
+    [refreshControl addTarget:self action:@selector(refreshView:) forControlEvents:UIControlEventValueChanged];
 }
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+-(void)startLoadingData
+{
+    JSONParseController *jsonParserObj = [[JSONParseController alloc]initWithURL:getURLString];
+    
+    jsonParserObj.delegate = self;
+}
+
+#pragma mark - pull to refresh
+//defining pull to refresh method and displaying latest data from server
+-(void)refreshView:(UIRefreshControl *)refresh
+{
+    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:@"Refreshing data..."];
+    
+    [self startLoadingData];
+    
+    NSDateFormatter *formatter = [[NSDateFormatter alloc]init];
+    [formatter setDateFormat:@"MMM d, h:mm a"];
+    NSString *lastUpdated = [NSString stringWithFormat:@"Last updated on %@",[formatter stringFromDate:[NSDate date]]];
+    refresh.attributedTitle = [[NSAttributedString alloc]initWithString:lastUpdated];
+    
+    [refresh endRefreshing];
 }
 
 #pragma mark - implement protocol method
